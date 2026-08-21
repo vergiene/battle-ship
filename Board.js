@@ -37,7 +37,7 @@ export class Board {
 		return flag ? result : null;
 	}
 
-	placeShip(x, y, ship) {
+	placeShips(x, y, ship) {
 		let validCells = this.canPlaceShip(x, y, ship);
 		if (validCells === null) return false;
 		this._ships.push(ship);
