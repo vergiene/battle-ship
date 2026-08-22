@@ -23,7 +23,7 @@ export class Player {
 	placeShips(shipName, length, isVertical, startPosition) {
 		let ship = new Ship(shipName, length, isVertical);
 		ship._startPosition = startPosition;
-		this._board.placeShip(ship, ship._startPosition.x, ship._startPosition.y);
+		this._board.placeShip(ship._startPosition.x, ship._startPosition.y, ship);
 	}
 	async takeTurn(opponent) {
 		await new Promise(resolve => setTimeout(resolve, 1000));
