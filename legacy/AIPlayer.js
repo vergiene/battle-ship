@@ -1,5 +1,4 @@
 import {Player} from "./player.js";
-import {Board} from "./board.js";
 import {Ship} from "./ship.js";
 
 export class AIPlayer extends Player {
@@ -7,6 +6,7 @@ export class AIPlayer extends Player {
 		super(name, boardSize);
 		this._previousAttacks = [];
 	}
+
 	placeShips(length) {
 		let name = 'AIShip' + Math.floor(Math.random() * 100);
 		let isVertical = Math.floor(Math.random() * 2);
