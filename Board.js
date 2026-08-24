@@ -18,23 +18,41 @@ export class Board {
 	}
 
 	canPlaceShip(startX, startY, ship) {
-		if (ship.isVertical && startY + ship.size > 10) return false;
-		if (!ship.isVertical && startX + ship.size > 10) return false;
+		if (ship.isVertical && startY + ship.size > this._size) return null;
+		if (!ship.isVertical && startX + ship.size > this._size) return null;
 
 		const result = [];
-		let flag = true;
 
-		for (let i = 0; i < ship.size && flag; i++) {
+		for (let i = 0; i < ship.size; i++) {
 			const x = ship.isVertical ? startX : startX + i;
 			const y = ship.isVertical ? startY + i : startY;
-			if (this._grid[y][x] === null) {
-				result.push([x, y]);
-				continue;
+			if (this._grid[y][x] !== null || !this.isThereNeighbor(x, y)) {
+				return null;
 			}
-				flag = false;
+			result.push([x, y]);
 		}
 
-		return flag ? result : null;
+		return result;
+	}
+
+	isThereNeighbor(x, y) {
+		for (let offsetY = -1; offsetY <= 1; offsetY++) {
+			for (let offsetX = -1; offsetX <= 1; offsetX++) {
+				const neighborX = x + offsetX;
+				const neighborY = y + offsetY;
+
+				if (
+					neighborX >= 0 &&
+					neighborX < this._size &&
+					neighborY >= 0 &&
+					neighborY < this._size &&
+					this._grid[neighborY][neighborX] !== null
+				) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 
 	placeShips(x, y, ship) {
@@ -52,15 +70,18 @@ export class Board {
 
 	receiveAttack(x, y) {
 		let cell = this._grid[y][x];
-		if (cell === null) {
+		let type = this.getCellState(x, y);
+		if (type === 'empty') {
 			this._grid[y][x] = {type: 'miss'};
 			return false;
-		} else {
+		} else if (type === 'ship') {
 			const ship = cell.ship;
 			const index = cell.index;
 			ship.hit(index);
 			this._grid[y][x] = {...cell, type: 'hit'};
 			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -71,5 +92,26 @@ export class Board {
 		} else {
 			return cell.type;
 		}
+	}
+
+	// for debug
+	display() {
+		let boardCells = '';
+		for (let y = 0; y < this._size; y++) {
+			for (let x = 0; x < this._size; x++) {
+				let type = this.getCellState(x, y);
+				if (type === 'ship') {
+					boardCells += 'S';
+				} else if (type === 'hit') {
+					boardCells += 'X';
+				} else if (type === 'miss') {
+					boardCells += 'M';
+				} else {
+					boardCells += '~';
+				}
+			}
+			boardCells += '\n';
+		}
+		console.log(boardCells);
 	}
 }

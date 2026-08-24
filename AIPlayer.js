@@ -1,7 +1,7 @@
 import {Player} from "./Player.js";
 
 export class AIPlayer extends Player {
-	takeTurn(opponent) {
+	takeTurn() {
 		let x, y;
 		let state = 'hit';
 		while (state === 'hit' || state === 'miss') {
@@ -10,6 +10,6 @@ export class AIPlayer extends Player {
 			state = this._board.getCellState(x, y);
 		}
 
-		return { x, y, opponent };
+		return [ x, y ];
 	}
 }
