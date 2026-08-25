@@ -22,8 +22,10 @@ export class App {
 	run() {
 		this.gameSetup();
 		this.shipPlacement(this._firstPlayer);
+		// for debug
 		this._firstPlayer.board.display();
 		this.shipPlacement(this._secondPlayer);
+		// for debug
 		this._secondPlayer.board.display();
 		this.gameLoop();
 	}
@@ -35,6 +37,7 @@ export class App {
 			let opponent = currentPlayer === this._firstPlayer ? this._secondPlayer : this._firstPlayer;
 			let [x, y] = currentPlayer.takeTurn();
 			let isHit = opponent.board.receiveAttack(x, y);
+			// for debug
 			if (isHit) {
 				console.log("Hit");
 			} else {
@@ -51,5 +54,6 @@ export class App {
 	}
 }
 
+// for debug
 let app = new App('Max');
 app.run();
