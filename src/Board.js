@@ -16,9 +16,7 @@ export class Board {
 	canPlaceShip(startX, startY, ship) {
 		if (ship.isVertical && startY + ship.size > this._size) return null;
 		if (!ship.isVertical && startX + ship.size > this._size) return null;
-
 		const result = [];
-
 		for (let i = 0; i < ship.size; i++) {
 			const x = ship.isVertical ? startX : startX + i;
 			const y = ship.isVertical ? startY + i : startY;
@@ -27,7 +25,6 @@ export class Board {
 			}
 			result.push([x, y]);
 		}
-
 		return result;
 	}
 
@@ -36,7 +33,6 @@ export class Board {
 			for (let offsetX = -1; offsetX <= 1; offsetX++) {
 				const neighborX = x + offsetX;
 				const neighborY = y + offsetY;
-
 				if (
 					neighborX >= 0 &&
 					neighborX < this._size &&
@@ -55,12 +51,10 @@ export class Board {
 		let validCells = this.canPlaceShip(x, y, ship);
 		if (validCells === null) return false;
 		this._ships.push(ship);
-
 		for (let i = 0; i < validCells.length; i++) {
 			let [x, y] = validCells[i];
 			this._grid[y][x] = {ship, index: i, type: 'ship'};
 		}
-
 		return true;
 	}
 
