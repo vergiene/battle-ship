@@ -14,6 +14,14 @@ export class Player {
 		return this._board;
 	}
 
+	setCells(cells) {
+		this._cells = cells;
+	}
+
+	get cells() {
+		return this._cells;
+	}
+
 	placeShip(size) {
 		let flag = false;
 		while (!flag) {

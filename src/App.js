@@ -1,6 +1,7 @@
 import { Board } from "./Board.js";
 import { HumanPlayer } from "./humanPlayer.js";
 import { AIPlayer } from "./AIPlayer.js";
+import {createBoard, renderBoard} from "./render.js";
 
 export class App {
 	constructor(name) {
@@ -9,7 +10,11 @@ export class App {
 
 	gameSetup() {
 		this._firstPlayer = new HumanPlayer(this._name, new Board());
+		const container = document.getElementById('human-board');
+		this._firstPlayer.setCells(createBoard(this._firstPlayer.board, container));
 		this._secondPlayer = new AIPlayer('Robot', new Board());
+		const AIContainer = document.getElementById('robot-board');
+		this._secondPlayer.setCells(createBoard(this._secondPlayer.board, AIContainer));
 	}
 
 	shipPlacement(player) {
@@ -22,11 +27,9 @@ export class App {
 	run() {
 		this.gameSetup();
 		this.shipPlacement(this._firstPlayer);
-		// for debug
-		this._firstPlayer.board.display();
+		renderBoard(this._firstPlayer.board, this._firstPlayer.cells, false);
 		this.shipPlacement(this._secondPlayer);
-		// for debug
-		this._secondPlayer.board.display();
+		renderBoard(this._secondPlayer.board, this._secondPlayer.cells, true);
 		this.gameLoop();
 	}
 
@@ -36,14 +39,9 @@ export class App {
 		while(!isGameEnd) {
 			let opponent = currentPlayer === this._firstPlayer ? this._secondPlayer : this._firstPlayer;
 			let [x, y] = currentPlayer.takeTurn();
-			let isHit = opponent.board.receiveAttack(x, y);
-			// for debug
-			if (isHit) {
-				console.log("Hit");
-			} else {
-				console.log("Miss");
-			}
-			opponent.board.display();
+			opponent.board.receiveAttack(x, y);
+			const isShipHidden = opponent === this._secondPlayer;
+			renderBoard(opponent.board, opponent.cells, isShipHidden);
 			isGameEnd = opponent.board.ships.every(ship => ship.isSunk());
 			if (!isGameEnd) {
 				currentPlayer = opponent;

@@ -13,10 +13,6 @@ export class Board {
 		return this._ships;
 	}
 
-	get grid() {
-		return this._grid; // for render?
-	}
-
 	canPlaceShip(startX, startY, ship) {
 		if (ship.isVertical && startY + ship.size > this._size) return null;
 		if (!ship.isVertical && startX + ship.size > this._size) return null;
@@ -92,26 +88,5 @@ export class Board {
 		} else {
 			return cell.type;
 		}
-	}
-
-	// for debug
-	display() {
-		let boardCells = '';
-		for (let y = 0; y < this._size; y++) {
-			for (let x = 0; x < this._size; x++) {
-				let type = this.getCellState(x, y);
-				if (type === 'ship') {
-					boardCells += 'S';
-				} else if (type === 'hit') {
-					boardCells += 'X';
-				} else if (type === 'miss') {
-					boardCells += 'M';
-				} else {
-					boardCells += '~';
-				}
-			}
-			boardCells += '\n';
-		}
-		console.log(boardCells);
 	}
 }
