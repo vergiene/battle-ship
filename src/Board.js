@@ -20,7 +20,7 @@ export class Board {
 		for (let i = 0; i < ship.size; i++) {
 			const x = ship.isVertical ? startX : startX + i;
 			const y = ship.isVertical ? startY + i : startY;
-			if (this._grid[y][x] !== null || !this.isThereNeighbor(x, y)) {
+			if (this._grid[y][x] !== null || !this.isThereNeighbour(x, y)) {
 				return null;
 			}
 			result.push([x, y]);
@@ -28,7 +28,7 @@ export class Board {
 		return result;
 	}
 
-	isThereNeighbor(x, y) {
+	isThereNeighbour(x, y) {
 		for (let offsetY = -1; offsetY <= 1; offsetY++) {
 			for (let offsetX = -1; offsetX <= 1; offsetX++) {
 				const neighborX = x + offsetX;

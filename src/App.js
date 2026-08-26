@@ -10,35 +10,34 @@ export class App {
 
 	gameSetup() {
 		this._firstPlayer = new HumanPlayer(this._name, new Board());
-		const container = document.getElementById('human-board');
-		this._firstPlayer.setCells(createBoard(this._firstPlayer.board, container));
+		this._firstPlayer.setContainer(document.getElementById('human-board'));
+		this._firstPlayer.setCells(createBoard(this._firstPlayer.board, this._firstPlayer.container));
 		this._secondPlayer = new AIPlayer('Robot', new Board());
-		const AIContainer = document.getElementById('robot-board');
-		this._secondPlayer.setCells(createBoard(this._secondPlayer.board, AIContainer));
+		this._secondPlayer.setContainer(document.getElementById('robot-board'));
+		this._secondPlayer.setCells(createBoard(this._secondPlayer.board, this._secondPlayer.container));
 	}
 
-	shipPlacement(player) {
+	async shipPlacement(player, isHidden) {
 		const shipSizes = [4, 3, 3, 2, 2, 2, 1, 1, 1, 1];
 		for (const size of shipSizes) {
-			player.placeShip(size);
+			await player.placeShip(size);
+			renderBoard(player.board, player.cells, isHidden);
 		}
 	}
 
-	run() {
+	async run() {
 		this.gameSetup();
-		this.shipPlacement(this._firstPlayer);
-		renderBoard(this._firstPlayer.board, this._firstPlayer.cells, false);
-		this.shipPlacement(this._secondPlayer);
-		renderBoard(this._secondPlayer.board, this._secondPlayer.cells, true);
-		this.gameLoop();
+		await this.shipPlacement(this._firstPlayer, false);
+		await this.shipPlacement(this._secondPlayer, true);
+		await this.gameLoop();
 	}
 
-	gameLoop() {
+	async gameLoop() {
 		let currentPlayer = this._firstPlayer;
 		let isGameEnd = false;
 		while(!isGameEnd) {
 			let opponent = currentPlayer === this._firstPlayer ? this._secondPlayer : this._firstPlayer;
-			let [x, y] = currentPlayer.takeTurn();
+			let [x, y] = await currentPlayer.takeTurn(opponent.container, opponent.board);
 			opponent.board.receiveAttack(x, y);
 			const isShipHidden = opponent === this._secondPlayer;
 			renderBoard(opponent.board, opponent.cells, isShipHidden);

@@ -19,4 +19,12 @@ export class Player {
 	get cells() {
 		return this._cells;
 	}
+
+	setContainer(container) {
+		this._container = container;
+	}
+
+	get container() {
+		return this._container;
+	}
 }
