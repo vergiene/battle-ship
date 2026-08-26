@@ -37,10 +37,13 @@ export class App {
 		let isGameEnd = false;
 		while(!isGameEnd) {
 			let opponent = currentPlayer === this._firstPlayer ? this._secondPlayer : this._firstPlayer;
+			const isAI = opponent === this._secondPlayer;
 			let [x, y] = await currentPlayer.takeTurn(opponent.container, opponent.board);
-			opponent.board.receiveAttack(x, y);
-			const isShipHidden = opponent === this._secondPlayer;
-			renderBoard(opponent.board, opponent.cells, isShipHidden);
+			const isHit = opponent.board.receiveAttack(x, y);
+			if (!isAI) {
+				currentPlayer.processResult(x, y, isHit, opponent.board);
+			}
+			renderBoard(opponent.board, opponent.cells, isAI);
 			isGameEnd = opponent.board.ships.every(ship => ship.isSunk());
 			if (!isGameEnd) {
 				currentPlayer = opponent;

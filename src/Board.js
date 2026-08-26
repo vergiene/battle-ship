@@ -13,6 +13,10 @@ export class Board {
 		return this._ships;
 	}
 
+	get grid() {
+		return this._grid;
+	}
+
 	canPlaceShip(startX, startY, ship) {
 		if (ship.isVertical && startY + ship.size > this._size) return null;
 		if (!ship.isVertical && startX + ship.size > this._size) return null;
