@@ -9,14 +9,6 @@ export class Ship {
 		return this._size;
 	}
 
-	get hits() {
-		return this._hits;
-	}
-
-	set hits(hits) {
-		this._hits = hits;
-	}
-
 	get isVertical() {
 		return this._isVertical;
 	}

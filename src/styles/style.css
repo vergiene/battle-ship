@@ -1,41 +1,217 @@
-.app {
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-weight: bold;
+  color: #0d1b3e;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: linear-gradient(to bottom, #eaf3fb, #a8c8e8, #3b6ea5);
+}
+
+.header {
+  position: relative;
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 30px;
+  border: 1px solid #1e3a6d;
+  border-radius: 35px;
+  padding: 15px 40px;
+  background-color: rgba(59, 110, 165, 0.8);
+  box-shadow: 0 8px 20px rgba(13, 27, 62, 0.35);
+}
+
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 35px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.title {
+  text-transform: uppercase;
+  color: #0d1b3e;
+}
+
+.board__name {
+  text-transform: uppercase;
+  color: #0d1b3e;
+}
+
+.winner__banner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 30px;
+  width: 500px;
+  height: 300px;
+  border: 1px solid #1e3a6d;
+  border-radius: 20px;
+  background-color: rgba(59, 110, 165, 0.7);
+  transform: translate(-50%, -50%);
+}
+
+.winner__banner--hidden {
+  display: none;
+}
+
+.winner__banner__button {
+  width: 150px;
+  height: 50px;
+  border: 1px solid #1e3a6d;
+  border-radius: 15px;
+  text-align: center;
+  background-color: #1e3a6d;
+  color: #eaf3fb;
+  text-transform: uppercase;
+}
+
+.app {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 30px;
+  margin: 0 30px;
+  border: 1px solid #1e3a6d;
+  border-radius: 35px;
+  padding: 30px;
+  background-color: rgba(59, 110, 165, 0.7);
+  box-shadow: 0 8px 20px rgba(13, 27, 62, 0.35);
+}
+
+.app::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: 35px;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 #human-board,
-#robot-board
-{
-  width: 300px;
-  height: 300px;
+#robot-board {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
+  gap: 1px;
+  width: 350px;
+  height: 350px;
 }
 
 .cell {
-  width: 30px;
-  height: 30px;
-  border: 1px solid black;
-  background-color: white;
+  width: 35px;
+  height: 35px;
+  background: radial-gradient(circle 30px, #a8c8e8, transparent);
 }
 
 .hidden {
-  background-color: white;
+  background-image: radial-gradient(circle 30px, #a8c8e8, transparent);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .hit {
-  background-color: green;
+  background-image:
+          url("/icons/hit.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 .miss {
-  background-color: red;
+  background-image:
+          url("/icons/miss.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-.ship {
-  background-color: yellow;
+.ship__single-deck {
+  background-image:
+          url("/icons/ship_single.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
+}
+
+.ship__bow_v {
+  background-image:
+          url("/icons/ship_bow_v.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
+}
+
+.ship__bow_h {
+  background-image:
+          url("/icons/ship_bow_h.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
+}
+
+.ship__mid_v {
+  background-image:
+          url("/icons/ship_mid_v.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
+}
+
+.ship__mid_h {
+  background-image:
+          url("/icons/ship_mid_h.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
+}
+
+.ship__tail_v {
+  background-image:
+          url("/icons/ship_tail_v.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
+}
+
+.ship__tail_h {
+  background-image:
+          url("/icons/ship_tail_h.svg"),
+          radial-gradient(circle 30px, #a8c8e8, transparent);
 }
 
 .preview {
-  background-color: lightyellow;
+  background-color: #eaf3fb;
+  background-image: none;
+}
+
+.legend {
+  border: 1px solid #1e3a6d;
+  border-radius: 35px;
+  padding: 30px;
+  background-color: rgba(59, 110, 165, 0.7);
+  margin: 20px 30px 20px;
+  box-shadow: 0 8px 20px rgba(13, 27, 62, 0.35);
+
+}
+
+.legend__list {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  align-items: center;
+  gap: 10px 15px;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.legend__icon {
+  width: 25px;
+  height: 25px;
+}
+
+.legend__icon-item {
+  display: flex;
 }

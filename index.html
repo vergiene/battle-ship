@@ -1,16 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="/src/styles/style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/icons/ship.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/src/styles/style.css" />
   <title>sea-battle</title>
 </head>
+
 <body>
+  <header class="header">
+    <span class="board__name">Your board</span>
+    <h1 class="title">Battle Ship</h1>
+    <span class="board__name">Opponent board</span>
+  </header>
+  <div id="banner" class="winner__banner winner__banner--hidden">
+    <p id="banner__text" class="winner__banner__text"></p>
+    <button id="banner__button" class="winner__banner__button">
+      New Game
+    </button>
+  </div>
   <div class="app">
     <div id="human-board"></div>
     <div id="robot-board"></div>
   </div>
   <script type="module" src="/src/App.js"></script>
+  <div class="legend">
+    <dl class="legend__list">
+      <dt class="legend__icon ship__single-deck"></dt>
+      <dd>Single Deck</dd>
+      <div class="legend__icon-item">
+        <dt class="legend__icon ship__bow_h"></dt>
+        <dt class="legend__icon ship__tail_h"></dt>
+      </div>
+      <dd>Double Deck</dd>
+
+      <div class="legend__icon-item">
+        <dt class="legend__icon ship__bow_h"></dt>
+        <dt class="legend__icon ship__mid_h"></dt>
+        <dt class="legend__icon ship__tail_h"></dt>
+      </div>
+      <dd>Three Deck</dd>
+
+      <div class="legend__icon-item">
+        <dt class="legend__icon ship__bow_h"></dt>
+        <dt class="legend__icon ship__mid_h"></dt>
+        <dt class="legend__icon ship__mid_h"></dt>
+        <dt class="legend__icon ship__tail_h"></dt>
+      </div>
+      <dd>Four Deck</dd>
+
+      <dt class="legend__icon hit"></dt>
+      <dd>Hit</dd>
+      <dt class="legend__icon miss"></dt>
+      <dd>Miss</dd>
+<!--      <dt class="legend__icon sunk"></dt>-->
+<!--      <dd>Sunk</dd>-->
+    </dl>
+  </div>
 </body>
+
 </html>

@@ -49,8 +49,22 @@ export class App {
 				currentPlayer = opponent;
 			}
 		}
-		// TODO replace with the DOM banner
-		console.log(`${currentPlayer.name} wins!`);
+		this.showWinner(currentPlayer.name);
+	}
+
+	showWinner(winner) {
+		const container = document.getElementById('banner');
+		const text = document.getElementById('banner__text');
+		const button = document.getElementById('banner__button');
+		text.textContent = `${winner} is the winner! Congrats! 🎉`;
+		const handleClick = () => {
+			container.classList.add('winner__banner--hidden');
+			// TODO change to await-async call
+			this.run();
+			button.removeEventListener('click', handleClick);
+		}
+		container.classList.remove('winner__banner--hidden');
+		button.addEventListener('click', handleClick);
 	}
 }
 
