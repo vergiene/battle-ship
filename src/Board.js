@@ -17,19 +17,29 @@ export class Board {
 		return this._grid;
 	}
 
-	canPlaceShip(startX, startY, ship) {
-		if (ship.isVertical && startY + ship.size > this._size) return null;
-		if (!ship.isVertical && startX + ship.size > this._size) return null;
+	getCandidate(x, y, ship) {
 		const result = [];
 		for (let i = 0; i < ship.size; i++) {
-			const x = ship.isVertical ? startX : startX + i;
-			const y = ship.isVertical ? startY + i : startY;
-			if (this._grid[y][x] !== null || !this.isThereNeighbour(x, y)) {
-				return null;
+			const xCand = ship.isVertical ? x : x + i;
+			const yCand = ship.isVertical ? y + i : y;
+			if (xCand >= this._size || yCand >= this._size) {
+				break;
 			}
-			result.push([x, y]);
+			result.push([xCand, yCand]);
 		}
 		return result;
+	}
+
+	canPlaceShip(startX, startY, ship) {
+		if (ship.isVertical && startY + ship.size > this._size) return false;
+		if (!ship.isVertical && startX + ship.size > this._size) return false;
+		const candidate = this.getCandidate(startX, startY, ship);
+		for (const [x, y] of candidate) {
+			if (this._grid[y][x] !== null || !this.isThereNeighbour(x, y)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	isThereNeighbour(x, y) {
@@ -52,8 +62,9 @@ export class Board {
 	}
 
 	placeShips(x, y, ship) {
-		let validCells = this.canPlaceShip(x, y, ship);
-		if (validCells === null) return false;
+		let validCells = this.getCandidate(x, y, ship);
+		let isValid = this.canPlaceShip(x, y, ship);
+		if (!isValid) return false;
 		this._ships.push(ship);
 		for (let i = 0; i < validCells.length; i++) {
 			let [x, y] = validCells[i];

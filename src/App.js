@@ -59,13 +59,20 @@ export class App {
 
 	async gameLoop() {
 		let currentPlayer = this._firstPlayer;
+		let messageContainer = document.getElementById('message');
+		messageContainer.textContent = 'Select a cell to start the game.';
 		let isGameEnd = false;
+		let shipsRemain = currentPlayer.board.ships.length;
 		while (!isGameEnd) {
 			let opponent = currentPlayer === this._firstPlayer ? this._secondPlayer : this._firstPlayer;
 			const isAI = opponent === this._secondPlayer;
 			let [x, y] = await currentPlayer.takeTurn(opponent.container, opponent.board);
 			const isHit = opponent.board.receiveAttack(x, y);
-			if (!isAI) {
+			if (isHit && isAI) {
+				if (opponent.board.grid[y][x].ship.isSunk()) shipsRemain--;
+			}
+			messageContainer.textContent = `Enemy ships remaining: ${shipsRemain}`;
+			if (opponent !== this._secondPlayer) {
 				currentPlayer.processResult(x, y, isHit, opponent.board);
 			}
 			renderBoard(opponent.board, opponent.cells, isAI);

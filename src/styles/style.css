@@ -1,8 +1,8 @@
 * {
   box-sizing: border-box;
+  color: #0d1b3e;
   font-family: sans-serif;
   font-weight: bold;
-  color: #0d1b3e;
 }
 
 body {
@@ -20,8 +20,8 @@ body {
   border: 1px solid #1e3a6d;
   border-radius: 35px;
   padding: 15px 40px;
-  background-color: rgba(59, 110, 165, 0.8);
   box-shadow: 0 8px 20px rgba(13, 27, 62, 0.35);
+  background-color: rgba(59, 110, 165, 0.8);
 }
 
 .header::before {
@@ -36,8 +36,8 @@ body {
 
 .title,
 .board__name {
-  text-transform: uppercase;
   color: #0d1b3e;
+  text-transform: uppercase;
 }
 
 .winner__banner,
@@ -70,10 +70,10 @@ body {
   height: 50px;
   border: 1px solid #1e3a6d;
   border-radius: 15px;
-  text-align: center;
-  background-color: #1e3a6d;
   color: #eaf3fb;
+  text-align: center;
   text-transform: uppercase;
+  background-color: #1e3a6d;
 }
 
 .app {
@@ -85,9 +85,9 @@ body {
   margin: 0 30px;
   border: 1px solid rgba(30, 58, 109, 0.8);
   border-radius: 35px;
-  padding: 30px;
-  background-color: rgba(59, 110, 165, 0.7);
+  padding: 25px;
   box-shadow: 0 8px 20px rgba(13, 27, 62, 0.35);
+  background-color: rgba(59, 110, 165, 0.7);
 }
 
 .app::before {
@@ -125,8 +125,7 @@ body {
 
 .hit {
   background-image:
-          url("/icons/hit.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/hit.svg"), radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -134,24 +133,22 @@ body {
 
 .sunk {
   background-image:
-          url("/icons/sunk.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/sunk.svg"), radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .miss {
   background-image:
-          url("/icons/miss.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/miss.svg"), radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
 }
 
 .ship__single-deck {
   background-image:
-          url("/icons/ship_single.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/ship_single.svg"),
+    radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -159,8 +156,8 @@ body {
 
 .ship__bow_v {
   background-image:
-          url("/icons/ship_bow_v.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/ship_bow_v.svg"),
+    radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -168,8 +165,8 @@ body {
 
 .ship__bow_h {
   background-image:
-          url("/icons/ship_bow_h.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/ship_bow_h.svg"),
+    radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -177,8 +174,8 @@ body {
 
 .ship__mid_v {
   background-image:
-          url("/icons/ship_mid_v.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/ship_mid_v.svg"),
+    radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -186,8 +183,8 @@ body {
 
 .ship__mid_h {
   background-image:
-          url("/icons/ship_mid_h.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/ship_mid_h.svg"),
+    radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -195,8 +192,8 @@ body {
 
 .ship__tail_v {
   background-image:
-          url("/icons/ship_tail_v.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/ship_tail_v.svg"),
+    radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -204,8 +201,8 @@ body {
 
 .ship__tail_h {
   background-image:
-          url("/icons/ship_tail_h.svg"),
-          radial-gradient(circle 30px, #a8c8e8, transparent);
+    url("/icons/ship_tail_h.svg"),
+    radial-gradient(circle 30px, #a8c8e8, transparent);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -216,13 +213,19 @@ body {
   background-image: none;
 }
 
+.preview-bad {
+  background-color: rgba(255, 0, 0, 0.6);
+}
+
 .legend {
+  margin: 20px 30px 20px;
   border: 1px solid rgba(30, 58, 109, 0.8);
   border-radius: 35px;
-  padding: 30px;
-  background-color: rgba(59, 110, 165, 0.7);
-  margin: 20px 30px 20px;
+  padding: 25px;
   box-shadow: 0 8px 20px rgba(13, 27, 62, 0.35);
+  font-size: calc(25px / 1.5);
+  line-height: 25px;
+  background-color: rgba(59, 110, 165, 0.7);
 }
 
 .legend::before {

@@ -4,6 +4,8 @@ import {Ship} from "./Ship.js";
 export class HumanPlayer extends Player {
 	placeShip(size) {
 		return new Promise((resolve) => {
+			let messageContainer = document.getElementById('message');
+			messageContainer.textContent = `Place your ${size}-deck ship. Use SPACE to rotate`;
 			let isVertical = Math.random() > 0.5;
 			let lastX = null;
 			let lastY = null;
@@ -11,22 +13,30 @@ export class HumanPlayer extends Player {
 			const container = document.getElementById('human-board');
 			const clearPreview = () => {
 				this._cells.forEach(cell => cell.classList.remove('preview'));
+				this._cells.forEach(cell => cell.classList.remove('preview-bad'));
 			};
 
 			const updatePreview = (x, y) => {
 				const ship = new Ship(size, isVertical);
-				const validCells = this._board.canPlaceShip(x, y, ship);
+				let candidate = this._board.getCandidate(x, y, ship);
+				let isValid = this._board.canPlaceShip(x, y, ship);
 				clearPreview();
-				if (validCells) {
-					for (const [cellX, cellY] of validCells) {
+				if (isValid) {
+					for (const [cellX, cellY] of candidate) {
 						const index = this._board.size * cellY + cellX;
 						this._cells[index].classList.add('preview');
+					}
+				} else {
+					for (const [cellX, cellY] of candidate) {
+						const index = this._board.size * cellY + cellX;
+						this._cells[index].classList.add('preview-bad');
 					}
 				}
 			};
 
 			const handleKeydown = event => {
 				if (event.code === 'Space') {
+					event.preventDefault();
 					isVertical = !isVertical;
 					if (lastX !== null && lastY !== null) {
 						updatePreview(lastX, lastY);
