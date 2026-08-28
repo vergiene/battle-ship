@@ -17,14 +17,22 @@ export function createBoard(board, container) {
 export function renderBoard(board, cells, isShipHidden) {
 	for (let i = 0; i < board.size; i++) {
 		for (let j = 0; j < board.size; j++) {
-			let type = board.getCellState(j, i);
-			let index = (board.size * i) + j;
+			const boardCell = board.grid[i][j];
+			const type = board.getCellState(j, i);
+			const index = (board.size * i) + j;
 			if (type === 'ship') {
 				if (isShipHidden) {
 					cells[index].className = `cell hidden`;
 					continue;
 				}
-				renderShipSegment(board.grid[i][j], cells[index]);
+				renderShipSegment(boardCell, cells[index]);
+				continue;
+			} else if (type === 'hit') {
+				if (boardCell.ship.isSunk()) {
+					cells[index].className = `cell sunk`;
+					continue;
+				}
+				cells[index].className = 'cell hit';
 				continue;
 			}
 			cells[index].className = `cell ${type}`;

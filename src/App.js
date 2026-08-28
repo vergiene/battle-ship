@@ -70,7 +70,7 @@ export class App {
 			}
 			renderBoard(opponent.board, opponent.cells, isAI);
 			isGameEnd = opponent.board.ships.every(ship => ship.isSunk());
-			if (!isGameEnd) {
+			if (!isHit) {
 				currentPlayer = opponent;
 			}
 		}
@@ -94,6 +94,5 @@ export class App {
 	}
 }
 
-// for debug
 let app = new App();
 app.run().catch((err) => {console.error('Failed to run App', err)});
